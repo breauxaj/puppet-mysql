@@ -1,6 +1,6 @@
 class mysql {
   $required = $operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'mysql', 'mysql-mmm', 'mysql-server' ],
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'mysql-server' ],
   }
 
   package { $required: ensure => latest }
@@ -11,6 +11,28 @@ class mysql {
     mode   => '0744',
     source => 'puppet:///modules/mysql/tuning-primer.sh'
   }
+
+}
+
+class mysql::mmm {
+  Class['mysql::mmm']->Class['mysql']
+
+  $required = $operatingsystem ? {
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'mysql-mmm' ],
+  }
+
+  package { $required: ensure => latest }
+
+}
+
+class mysql::top {
+  Class['mysql::top']->Class['mysql']
+
+  $required = $operatingsystem ? {
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'mytop' ],
+  }
+
+  package { $required: ensure => latest }
 
 }
 
