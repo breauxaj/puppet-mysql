@@ -6,13 +6,12 @@ Installs mysql server and supporting tools.
 Samples
 -------
 ```
-include mysql, mysql::mmm, mysql::top
+include mysql
+include mysql::mmm
+include mysql::top
 ```
 ```
-msyql::service { 'default':
-  ensure => running,
-  enable => true,
-}
+msyql::service { 'default': ensure => running, enable => true }
 ```
 
 License
