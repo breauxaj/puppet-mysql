@@ -14,6 +14,11 @@ include mysql::top
 msyql::service { 'default': ensure => running, enable => true }
 ```
 
+Notes
+-----
+
+Needs a lot of work. Don't use the config.
+
 License
 -------
 GPL3
