@@ -14,3 +14,11 @@ msyql::service { 'default':
   enable => true,
 }
 ```
+
+License
+-------
+GPL3
+
+Contact
+-------
+breauxaj AT gmail DOT com
