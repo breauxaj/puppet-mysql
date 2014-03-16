@@ -1,10 +1,17 @@
-class mysql::mmm {
-  Class['mysql::mmm']->Class['mysql']
+class mysql::mmm (
+  $ensure = 'latest'
+){
+  $depends = $::operatingsystem ? {
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'mysql-server' ],
+  }
 
   $required = $::operatingsystem ? {
     /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'mysql-mmm' ],
   }
 
-  package { $required: ensure => latest }
+  package { $required:
+    ensure  => $ensure,
+    require => Package[$depends]
+  }
 
 }
