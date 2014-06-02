@@ -1,11 +1,27 @@
 class mysql (
-  $ensure = 'latest',
+  $ensure = 'installed',
 ) {
   $required = $::operatingsystem ? {
-    /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'mysql-server' ],
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [
+      'mysql-server'
+    ],
   }
 
-  package { $required: ensure => $ensure }
+  $removed = $::operatingsystem ? {
+    /(?i-mx:centos|fedora|redhat|scientific)/ => [
+      'MariaDB-client',
+      'MariaDB-server'
+    ],
+  }
+
+  package { $removed:
+    ensure => absent,
+    before => Package[$required],
+  }
+
+  package { $required:
+    ensure => $ensure
+  }
 
   file { '/usr/local/sbin/mysqltuner.pl':
     owner  => 'root',
