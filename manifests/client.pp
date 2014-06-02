@@ -1,5 +1,5 @@
 class mysql::client (
-  $ensure = 'latest',
+  $ensure = 'installed',
 ) {
   $required = $::operatingsystem ? {
     /(?i-mx:centos|fedora|redhat|scientific)/ => [ 'mysql' ],
