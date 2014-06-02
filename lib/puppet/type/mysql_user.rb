@@ -1,5 +1,5 @@
 Puppet::Type.newtype(:mysql_user) do
-  @doc = "Manage mysql users"
+  desc "Manage mysql users"
 
   ensurable
 
@@ -11,6 +11,7 @@ Puppet::Type.newtype(:mysql_user) do
         raise ArgumentError , "%s is not a valid user name" % value
       end
     end
+
   end
 
   newparam(:host) do
@@ -21,6 +22,7 @@ Puppet::Type.newtype(:mysql_user) do
         raise ArgumentError , "%s is not a valid host name" % value
       end
     end
+
   end
 
 end
