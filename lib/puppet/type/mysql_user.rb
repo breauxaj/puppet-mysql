@@ -14,7 +14,7 @@ Puppet::Type.newtype(:mysql_user) do
 
   end
 
-  newparam(:host) do
+  newproperty(:host) do
     desc "The host name"
 
     validate do |value|
@@ -25,7 +25,7 @@ Puppet::Type.newtype(:mysql_user) do
 
   end
 
-  newparam(:password) do
+  newproperty(:password) do
     desc "The password, at least 5 characters, no more that 16 characters"
 
     validate do |value|
