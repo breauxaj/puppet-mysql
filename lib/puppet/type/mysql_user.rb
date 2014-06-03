@@ -18,8 +18,19 @@ Puppet::Type.newtype(:mysql_user) do
     desc "The host name"
 
     validate do |value|
-      unless value =~ /[a-z0-9\.*-]+/
-        raise ArgumentError , "%s is not a valid host name" % value
+      unless value =~ /[a-z0-9\.*\-%]+/
+        raise ArgumentError , "%s is not a valid host/ip" % value
+      end
+    end
+
+  end
+
+  newparam(:password) do
+    desc "The password, at least 5 characters, no more that 16 characters"
+
+    validate do |value|
+      unless value =~ /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,16}$/
+        raise ArgumentError , "%s is not a secure password" % value
       end
     end
 
