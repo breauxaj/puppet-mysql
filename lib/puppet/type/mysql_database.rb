@@ -14,7 +14,7 @@ Puppet::Type.newtype(:mysql_database) do
 
   end
 
-  newparam(:character) do
+  newproperty(:character) do
     desc "The character set"
 
     validate do |value|
@@ -25,7 +25,7 @@ Puppet::Type.newtype(:mysql_database) do
 
   end
 
-  newparam(:collate) do
+  newproperty(:collate) do
     desc "The collation"
 
     validate do |value|
