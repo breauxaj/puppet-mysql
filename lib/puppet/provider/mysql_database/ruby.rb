@@ -3,6 +3,18 @@ Puppet::Type.type(:mysql_database).provide(:ruby) do
 
   commands :mysql => 'mysql', :mysqladmin => 'mysqladmin'
 
+  def show_databases
+    begin
+      output = mysql(['-B', '-N', '-e', 'show databases'])
+    rescue Puppet::ExecutionFailure => e
+      Puppet.debug("#mysql request had an error -> #{e.inspect}")
+      return nil
+    end
+    databases = output.split("\n").sort
+    return nil if databases.grep(//)
+    databases
+  end
+
   def create
 
   end
@@ -12,7 +24,7 @@ Puppet::Type.type(:mysql_database).provide(:ruby) do
   end
 
   def exists?
-    mysql 'show databases'
+    mysql('-e', 'show databases')
   end
 
 end
