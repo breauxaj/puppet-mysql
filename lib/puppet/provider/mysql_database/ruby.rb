@@ -3,7 +3,7 @@ Puppet::Type.type(:mysql_database).provide(:ruby) do
 
   commands :mysql => 'mysql', :mysqladmin => 'mysqladmin'
 
-  def show_databases
+  def show_databases(str)
     begin
       output = mysql(['-B', '-N', '-e', 'show databases'])
     rescue Puppet::ExecutionFailure => e
@@ -11,7 +11,7 @@ Puppet::Type.type(:mysql_database).provide(:ruby) do
       return nil
     end
     databases = output.split("\n").sort
-    return nil if databases.grep(//)
+    return nil if databases.grep(/str/)
     databases
   end
 
