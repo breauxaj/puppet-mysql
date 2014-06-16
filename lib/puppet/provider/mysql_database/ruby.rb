@@ -1,4 +1,4 @@
-Puppet::Type.type(:mysql_database).provide(:ruby) do
+Puppet::Type.type(:mysql_database).provide(:mysql) do
   desc "Manage databases, none of this will work without a .my.cnf file"
 
   commands :mysql => 'mysql', :mysqladmin => 'mysqladmin'
